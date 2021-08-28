@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+        <title>Lamp Control</title>
+    </head>
+    <body>
+        <div id="LampDiv">
+            <canvas id="Lamp" width=300 height=300></canvas>
+        </div>
+        <div id="ButtonDiv">
+            <p>
+                <button id="PowerButton" type="button">Power</button>
+                <button id="BrightnessButton" type="button">Brightness</button>
+                <button id="BlinkButton" type="button">Blink</button>
+            </p>
+        </div>
+
+        <script src="renderer.js"></script>
+    </body>
+</html>
+
