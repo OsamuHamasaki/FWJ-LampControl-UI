@@ -46,43 +46,52 @@ class Lamp extends Widget {
 class Button extends Widget {
     constructor(id) {
         super(id)
+        this._mouseDownHandler = (e)=>{}
+        this._mouseUpHandler = (e)=>{} 
+        this.initialize()
+    }
+
+    initialize() {
+        this._element.addEventListener("mousedown",
+            (e) => {
+                this._mouseDownHandler(e)
+                document.addEventListener("mouseup",
+                    (e) => {
+                        this._mouseUpHandler(e)
+                    },
+                    { once: true})
+            })
     }
 
     onMouseDown(f) {
-        this._element.addEventListener("mousedown", f)
+        this._mouseDownHandler = f
     }
 
     onMouseUp(f) {
-        this._element.addEventListener("mouseup",f)
+        this._mouseUpHandler = f
     }
 }
 
 const powerButton = new Button("PowerButton")
-
 powerButton.onMouseDown((e) => {
     window.api.notifyPowerButtonPressed()
 })
-
 powerButton.onMouseUp((e) => {
     window.api.notifyPowerButtonUnpressed()
 })
 
 const brightnessButton = new Button("BrightnessButton")
-
 brightnessButton.onMouseDown((e) => {
     window.api.notifyBrightnessButtonPressed()
 })
-
 brightnessButton.onMouseUp((e) => {
     window.api.notifyBrightnessButtonUnpressed()
 })
 
 const blinkButton = new Button("BlinkButton")
-
 blinkButton.onMouseDown((e) => {
     window.api.notifyBlinkButtonPressed()
 })
-
 blinkButton.onMouseUp((e) => {
     window.api.notifyBlinkButtonUnpressed()
 })
